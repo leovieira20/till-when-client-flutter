@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
+  static String routeName = '/homepage';
+
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;

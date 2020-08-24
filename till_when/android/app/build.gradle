@@ -38,7 +38,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.dreamsparser.till_when"
+        applicationId "com.dreamsparser.tillwhen"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
