@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:till_when/pages/project/create_project_page.dart';
 
 class MyHomePage extends StatefulWidget {
   static String routeName = '/homepage';
@@ -12,14 +13,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,20 +24,20 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              'Your projects will be here',
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: _navigateToCreateProject,
+        tooltip: 'Create Project',
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  void _navigateToCreateProject() {
+    Navigator.pushNamed(context, CreateProjectPage.routeName);
   }
 }
