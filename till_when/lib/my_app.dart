@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:till_when/pages/sign_in_page.dart';
+import 'package:till_when/pages/authentication_checker.dart';
 import 'package:till_when/router.dart';
 
 class MyApp extends StatelessWidget {
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: getRoutes(),
-      initialRoute: SignInPage.routeName,
+      initialRoute: AuthenticationChecker.routeName,
     );
   }
 }
