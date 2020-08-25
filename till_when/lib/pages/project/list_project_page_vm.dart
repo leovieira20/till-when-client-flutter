@@ -9,4 +9,8 @@ class ListProjectPageVm {
   Stream<List<Project>> getProjects() {
     return repository.list();
   }
+
+  Future<void> deleteProject(Project p) {
+    return repository.delete(p);
+  }
 }

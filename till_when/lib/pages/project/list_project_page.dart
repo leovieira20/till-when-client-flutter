@@ -23,30 +23,48 @@ class _ListProjectPageState extends State<ListProjectPage> {
       ),
       body: Center(
         child: StreamBuilder<List<Project>>(
-            stream: widget.vm.getProjects(),
-            builder: (BuildContext context, AsyncSnapshot<List<Project>> snapshot) {
-              if (!snapshot.hasData) {
-                return CircularProgressIndicator();
-              }
+          stream: widget.vm.getProjects(),
+          builder: (BuildContext context, AsyncSnapshot<List<Project>> snapshot) {
+            if (!snapshot.hasData) {
+              return CircularProgressIndicator();
+            }
 
-              var projects = snapshot.data;
+            var projects = snapshot.data;
 
-              if (projects.isEmpty) {
-                return Text(
-                  'Your projects will be here',
-                );
-              }
-
-              return ListView.builder(
-                itemCount: projects.length,
-                itemBuilder: (c, ix) {
-                  var p = projects[ix];
-                  return ListTile(
-                    title: Text(p.name),
-                  );
-                },
+            if (projects.isEmpty) {
+              return Text(
+                'Your projects will be here',
               );
-            }),
+            }
+
+            return ListView.builder(
+              itemCount: projects.length,
+              itemBuilder: (c, ix) {
+                var p = projects[ix];
+                return Card(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
+                    child: ListTile(
+                      title: Text(p.name),
+                      trailing: PopupMenuButton(
+                        child: Icon(Icons.more_vert),
+                        itemBuilder: (c) {
+                          return [
+                            PopupMenuItem(
+                              child: Text("Remove"),
+                              value: "remove",
+                            )
+                          ];
+                        },
+                        onSelected: (value) => widget.vm.deleteProject(p),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _navigateToCreateProject,

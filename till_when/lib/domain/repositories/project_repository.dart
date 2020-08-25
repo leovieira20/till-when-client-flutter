@@ -23,7 +23,18 @@ class ProjectRepository {
         .snapshots()
         .map((snapshot) => snapshot.docs)
         .map(
-          (list) => list.map((document) => Project.fromJson(document.data())).toList(),
+          (list) => list.map((d) => Project.fromJson(d.id, d.data())).toList(),
         );
+  }
+
+  Future<void> delete(Project p) {
+    var email = _userRepository.getLoggedUserEmail();
+
+    return FirebaseFirestore.instance
+        .collection("users")
+        .doc(email)
+        .collection("projects")
+        .doc(p.id)
+        .delete();
   }
 }
