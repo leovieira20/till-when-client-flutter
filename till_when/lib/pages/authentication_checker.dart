@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:till_when/ioc.dart';
 import 'package:till_when/pages/account/sign_in_page.dart';
-import 'package:till_when/pages/homepage.dart';
+import 'package:till_when/pages/project/list_project_page.dart';
 
 class AuthenticationChecker extends StatelessWidget {
   static String routeName = '/authenticationChecker';
@@ -18,7 +18,7 @@ class AuthenticationChecker extends StatelessWidget {
 
         var user = snapshot.data;
 
-        return user != null ? ioc<MyHomePage>() : ioc<SignInPage>();
+        return user != null ? ioc<ListProjectPage>() : ioc<SignInPage>();
       },
     );
   }

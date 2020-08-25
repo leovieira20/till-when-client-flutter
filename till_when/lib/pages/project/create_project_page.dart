@@ -19,7 +19,9 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Create Project"),),
+      appBar: AppBar(
+        title: Text("Create Project"),
+      ),
       body: Form(
         key: _formKey,
         child: Column(
@@ -39,20 +41,41 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: RaisedButton(
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {
-                    var name = _nameController.text;
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RaisedButton(
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      var name = _nameController.text;
 
-                    widget.vm.createProject(name);
-                  }
-                },
-                child: Text('Create'),
+                      _createProject(name);
+                    }
+                  },
+                  child: StreamBuilder<bool>(
+                    stream: widget.vm.isBusy,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData && snapshot.data == true) {
+                        return SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      return Text('Create');
+                    },
+                  ),
+                ),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _createProject(String name) async {
+    await widget.vm.createProject(name);
+    Navigator.pop(context);
   }
 }

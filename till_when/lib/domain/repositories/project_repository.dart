@@ -10,10 +10,20 @@ class ProjectRepository {
   Future<void> create(Project p) async {
     var email = _userRepository.getLoggedUserEmail();
 
-    await FirebaseFirestore.instance
+    await FirebaseFirestore.instance.collection("users").doc(email).collection("projects").add(p.toJson());
+  }
+
+  Stream<List<Project>> list() {
+    var email = _userRepository.getLoggedUserEmail();
+
+    return FirebaseFirestore.instance
         .collection("users")
         .doc(email)
         .collection("projects")
-        .add(p.toJson());
+        .snapshots()
+        .map((snapshot) => snapshot.docs)
+        .map(
+          (list) => list.map((document) => Project.fromJson(document.data())).toList(),
+        );
   }
 }
