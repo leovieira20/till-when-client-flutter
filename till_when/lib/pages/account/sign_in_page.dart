@@ -35,7 +35,9 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Future<void> googleSignIn() async {
-    await widget.vm.googleSignIn();
-    Navigator.popAndPushNamed(context, ListProjectPage.routeName);
+    var user = await widget.vm.googleSignIn();
+    if (user != null) {
+      Navigator.popAndPushNamed(context, ListProjectPage.routeName);
+    }
   }
 }
