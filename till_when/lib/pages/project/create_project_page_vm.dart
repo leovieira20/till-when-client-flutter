@@ -1,22 +1,20 @@
 import 'dart:async';
-
-import 'package:till_when/domain/model/project.dart';
+import 'package:till_when/domain/factories/project_factory.dart';
 import 'package:till_when/domain/repositories/project_repository.dart';
 
 class CreateProjectPageVm {
   final ProjectRepository repository;
   final StreamController<bool> _isBusy = StreamController();
+  final ProjectFactory projectFactory;
 
-  CreateProjectPageVm(this.repository) {
+  CreateProjectPageVm(this.projectFactory, this.repository) {
     _isBusy.sink.add(false);
   }
 
   Future<void> createProject(String name) async {
     _isBusy.sink.add(true);
 
-    var project = Project(name: name);
-
-    await repository.create(project);
+    await repository.create(await projectFactory.make(name));
 
     _isBusy.sink.add(false);
   }

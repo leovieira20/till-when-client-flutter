@@ -19,6 +19,7 @@ dependencies:
   firebase_auth: 0.18.0+1
   cloud_firestore: 0.14.0+2
   google_sign_in: 4.5.1
+  supercharged: 1.6.0
 
 dev_dependencies:
   flutter_test:
