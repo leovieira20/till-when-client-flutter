@@ -3,6 +3,7 @@ import 'package:till_when/domain/models/project.dart';
 import 'package:till_when/domain/repositories/project_repository.dart';
 
 class ListProjectPageVm {
+  List<Project> _currentShownProjects;
   var _projectsStream = StreamController<List<Project>>();
   
   ProjectRepository _repository;
@@ -10,17 +11,15 @@ class ListProjectPageVm {
   ListProjectPageVm(this._repository);
   
   Future<void> fetchProjects() async {
-    _projectsStream.sink.add(await _repository.list());
+    _currentShownProjects = await _repository.list();
+    _projectsStream.sink.add(_currentShownProjects);
   }
 
-  Future<void> changeProject(String action, Project p) {
-    switch (action) {
-      case 'remove':
-        return _delete(p);
-        break;
-      default:
-        throw ArgumentError('invalid action $action');
-    }
+  deleteProject(Project p) async {
+    _currentShownProjects.remove(p);
+    _projectsStream.add(_currentShownProjects);
+
+    _repository.delete(p);
   }
 
   Future<void> reorderProjects(num oldIx, num newIx, List<Project> projects) async {
@@ -37,10 +36,6 @@ class ListProjectPageVm {
 
   dispose() {
     _projectsStream.close();
-  }
-
-  Future<void> _delete(Project p) async {
-    await _repository.delete(p);
   }
 
   Stream<List<Project>> get projects => _projectsStream.stream;

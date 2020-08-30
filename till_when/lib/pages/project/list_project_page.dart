@@ -50,19 +50,15 @@ class _ListProjectPageState extends State<ListProjectPage> {
                       key: ValueKey(p.id),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
-                        child: ListTile(
-                          title: Text(p.name),
-                          trailing: PopupMenuButton(
-                            child: Icon(Icons.more_vert),
-                            itemBuilder: (c) {
-                              return [
-                                PopupMenuItem(
-                                  child: Text("Remove"),
-                                  value: "remove",
-                                ),
-                              ];
-                            },
-                            onSelected: (value) => widget.vm.changeProject(value, p),
+                        child: Dismissible(
+                          key: ValueKey(p.id),
+                          onDismissed: (direction) => widget.vm.deleteProject(p),
+                          child: ListTile(
+                            title: Text(p.name),
+                          ),
+                          background: Container(
+                            color: Colors.red,
+                            child: Icon(Icons.delete_forever),
                           ),
                         ),
                       ),
@@ -90,8 +86,9 @@ class _ListProjectPageState extends State<ListProjectPage> {
     );
   }
 
-  void _navigateToCreateProject() {
-    Navigator.pushNamed(context, CreateProjectPage.routeName);
+  Future<void> _navigateToCreateProject() async {
+    await Navigator.pushNamed(context, CreateProjectPage.routeName);
+    widget.vm.fetchProjects();
   }
 
   @override
