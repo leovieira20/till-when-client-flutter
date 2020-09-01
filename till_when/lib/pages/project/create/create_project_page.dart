@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:till_when/pages/project/create_project_page_vm.dart';
+import 'package:till_when/pages/project/create/create_project_page_vm.dart';
 
 class CreateProjectPage extends StatefulWidget {
   static String routeName = '/createProject';

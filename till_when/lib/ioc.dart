@@ -6,12 +6,12 @@ import 'package:till_when/domain/services/google_sign_in_service.dart';
 import 'package:till_when/firebase_init.dart';
 import 'package:till_when/my_app.dart';
 import 'package:till_when/pages/authentication_checker.dart';
-import 'package:till_when/pages/project/list_project_page.dart';
-import 'package:till_when/pages/project/create_project_page.dart';
-import 'package:till_when/pages/project/create_project_page_vm.dart';
 import 'package:till_when/pages/account/sign_in_page.dart';
 import 'package:till_when/pages/account/sign_in_page_vm.dart';
-import 'package:till_when/pages/project/list_project_page_vm.dart';
+import 'package:till_when/pages/project/create/create_project_page.dart';
+import 'package:till_when/pages/project/create/create_project_page_vm.dart';
+import 'package:till_when/pages/project/list/list_project_page.dart';
+import 'package:till_when/pages/project/list/list_project_page_vm.dart';
 import 'pages/authentication_checker.dart';
 
 GetIt ioc = GetIt.instance;

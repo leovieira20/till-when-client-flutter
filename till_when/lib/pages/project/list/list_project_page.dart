@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:till_when/domain/models/project.dart';
-import 'package:till_when/pages/project/create_project_page.dart';
-import 'package:till_when/pages/project/list_project_page_vm.dart';
+import 'package:till_when/pages/project/create/create_project_page.dart';
+import 'package:till_when/pages/project/list/list_project_page_vm.dart';
 
 class ListProjectPage extends StatefulWidget {
   static String routeName = '/listProject';
