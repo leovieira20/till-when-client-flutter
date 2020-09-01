@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:till_when/pages/project/create/components/project_name_input.dart';
+import 'package:till_when/pages/project/create/components/submit_button.dart';
 import 'package:till_when/pages/project/create/create_project_page_vm.dart';
 
 class CreateProjectPage extends StatefulWidget {
@@ -22,59 +24,42 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
       appBar: AppBar(
         title: Text("Create Project"),
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            TextFormField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                hintText: 'Project name',
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              ProjectNameInput(
+                controller: _nameController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+                hintText: "Project name",
               ),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: RaisedButton(
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      var name = _nameController.text;
-
-                      _createProject(name);
-                    }
-                  },
-                  child: StreamBuilder<bool>(
-                    stream: widget.vm.isBusy,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData && snapshot.data == true) {
-                        return SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-
-                      return Text('Create');
-                    },
-                  ),
-                ),
+              SubmitButton(
+                onPressed: _createProject,
+                isBusyController: widget.vm.isBusy,
+                label: "Create",
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Future<void> _createProject(String name) async {
+  Future<void> _createProject() async {
+    if (!_formKey.currentState.validate()) {
+      return;
+    }
+
+    var name = _nameController.text;
+
     await widget.vm.createProject(name);
     Navigator.pop(context);
   }
