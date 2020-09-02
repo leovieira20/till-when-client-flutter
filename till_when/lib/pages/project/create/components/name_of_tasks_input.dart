@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:till_when/pages/project/create/components/text_input.dart';
 
-class ProjectNameInput extends StatelessWidget {
+class NameOfTasksInput extends StatelessWidget {
   final TextEditingController controller;
 
-  const ProjectNameInput({
+  const NameOfTasksInput({
+    Key key,
     @required this.controller,
   });
 
@@ -12,13 +13,14 @@ class ProjectNameInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextInput(
       controller: controller,
+      hintText: "ex: Chapter",
       validator: (value) {
         if (value.isEmpty) {
           return 'Please enter some text';
         }
+
         return null;
       },
-      hintText: "Project name",
     );
   }
 }
