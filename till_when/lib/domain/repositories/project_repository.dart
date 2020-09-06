@@ -1,16 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:till_when/domain/models/project.dart';
-import 'package:till_when/domain/repositories/user_repository.dart';
 
 class ProjectRepository {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
+  final String _userEmail = FirebaseAuth.instance.currentUser.email;
+
   CollectionReference _projectCollection;
 
-  UserRepository _userRepository;
+  ProjectRepository() {
+    _projectCollection = _instance.collection("users").doc(_userEmail).collection("projects");
+  }
 
-  ProjectRepository(this._userRepository) {
-    var email = _userRepository.getLoggedUserEmail();
-    _projectCollection = _instance.collection("users").doc(email).collection("projects");
+  Future<Project> get(String id) async {
+    var snapshot = await _projectCollection.doc(id).get();
+
+    return Project.fromJson(id, snapshot.data());
   }
 
   Future<void> create(Project p) async {
@@ -42,11 +47,9 @@ class ProjectRepository {
   }
 
   Future<void> updateBatch(List<Project> projects) async {
-    var email = _userRepository.getLoggedUserEmail();
-
     var transaction = _instance.runTransaction((t) async {
       for (var o in projects) {
-        var docPath = _instance.doc("users/$email/projects/${o.id}");
+        var docPath = _instance.doc("users/$_userEmail/projects/${o.id}");
         t.update(docPath, o.toJson());
       }
     });

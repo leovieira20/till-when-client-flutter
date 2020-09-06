@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:till_when/domain/models/project.dart';
 import 'package:till_when/pages/project/create/create_project_page.dart';
+import 'package:till_when/pages/project/detail/detail_project_page.dart';
+import 'package:till_when/pages/project/list/components/project_card.dart';
 import 'package:till_when/pages/project/list/list_project_page_vm.dart';
 
 class ListProjectPage extends StatefulWidget {
@@ -46,22 +48,11 @@ class _ListProjectPageState extends State<ListProjectPage> {
             return ReorderableListView(
               children: projects
                   .map(
-                    (p) => Card(
+                    (p) => ProjectCard(
+                      project: p,
+                      onTapped: () => _navigateToProjectDetail(p),
+                      onDismissed: (e) => widget.vm.deleteProject(p),
                       key: ValueKey(p.id),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
-                        child: Dismissible(
-                          key: ValueKey(p.id),
-                          onDismissed: (direction) => widget.vm.deleteProject(p),
-                          child: ListTile(
-                            title: Text(p.name),
-                          ),
-                          background: Container(
-                            color: Colors.red,
-                            child: Icon(Icons.delete_forever),
-                          ),
-                        ),
-                      ),
                     ),
                   )
                   .toList(
@@ -89,6 +80,10 @@ class _ListProjectPageState extends State<ListProjectPage> {
   Future<void> _navigateToCreateProject() async {
     await Navigator.pushNamed(context, CreateProjectPage.routeName);
     widget.vm.fetchProjects();
+  }
+
+  _navigateToProjectDetail(Project p) {
+    Navigator.pushNamed(context, DetailProjectPage.routeName, arguments: p);
   }
 
   @override

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:till_when/pages/project/create/components/name_of_tasks_input.dart';
 import 'package:till_when/pages/project/create/components/num_of_tasks_input.dart';
 import 'package:till_when/pages/project/create/components/project_name_input.dart';
-import 'package:till_when/pages/project/create/components/text_input.dart';
 import 'package:till_when/pages/project/create/components/submit_button.dart';
 import 'package:till_when/pages/project/create/create_project_page_vm.dart';
+import 'package:till_when/pages/sizing_constants.dart';
 
 class CreateProjectPage extends StatefulWidget {
   static String routeName = '/createProject';
@@ -30,40 +30,40 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
         title: Text("Create Project"),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: kVerticalPadding, horizontal: kHorizontalPadding),
         child: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ProjectNameInput(controller: _nameController),
-              SizedBox(height: 20),
+              SizedBox(height: kMediumVerticalGap),
               Text(
                 "Tasks",
                 style: Theme.of(context).textTheme.headline6,
               ),
-              SizedBox(height: 10),
+              SizedBox(height: kSmallVerticalGap),
               Row(
                 children: [
                   Text(
                     "Num of tasks:",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: kSmallVerticalGap),
                   SizedBox(
-                    width: 30,
+                    width: kLargeHorizontalGap,
                     child: NumOfTasksInput(controller: _numOfTasksController),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: kSmallVerticalGap),
                   Text(
                     "Name of tasks:",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: kSmallHorizontalGap),
                   Expanded(child: NameOfTasksInput(controller: _nameOfTasksController)),
                 ],
               ),
-              SizedBox(height: 20),
+              SizedBox(height: kMediumVerticalGap),
               SubmitButton(
                 onPressed: _createProject,
                 isBusyController: widget.vm.isBusy,
