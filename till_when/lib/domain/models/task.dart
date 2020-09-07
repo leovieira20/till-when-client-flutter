@@ -4,9 +4,9 @@ part 'task.g.dart';
 
 @JsonSerializable()
 class Task {
-  String name;
+  String title;
 
-  Task(this.name);
+  Task(this.title);
 
   factory Task.fromJson(Map<String, dynamic> json) {
     return _$TaskFromJson(json);
@@ -18,6 +18,6 @@ class Task {
 
   @override
   String toString() {
-    return "name: $name";
+    return "name: $title";
   }
 }

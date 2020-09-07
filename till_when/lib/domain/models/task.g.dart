@@ -13,5 +13,5 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
-      'name': instance.name,
+      'name': instance.title,
     };

@@ -64,7 +64,7 @@ class DetailProjectPage extends StatelessWidget {
 
                     return Card(
                       child: ListTile(
-                        title: Text(t.name),
+                        title: Text(t.title),
                       ),
                     );
                   },
