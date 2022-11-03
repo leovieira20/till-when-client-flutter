@@ -10,7 +10,7 @@ abstract class DetailProjectPageVmBase with Store {
   final TaskRepository taskRepository;
 
   @observable
-  List<Task> tasks;
+  List<Task> tasks = [];
 
   DetailProjectPageVmBase(this.taskRepository);
 

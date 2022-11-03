@@ -77,12 +77,12 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
   }
 
   Future<void> _createProject() async {
-    if (!_formKey.currentState.validate()) {
+    if (!_formKey.currentState!.validate()) {
       return;
     }
 
     var name = _nameController.text;
-    var numOfTasks = num.parse(_numOfTasksController.text);
+    var numOfTasks = int.parse(_numOfTasksController.text);
     var nameOfTasks = _nameOfTasksController.text;
 
     await widget.vm.createProject(name, numOfTasks, nameOfTasks);

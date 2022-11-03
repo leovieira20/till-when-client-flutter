@@ -28,7 +28,7 @@ class _AuthenticationCheckerState extends State<AuthenticationChecker> {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: widget.vm.currentUSer,
-      builder: (BuildContext c, AsyncSnapshot<User> snapshot) {
+      builder: (BuildContext c, AsyncSnapshot<User?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: CircularProgressIndicator(),
@@ -44,7 +44,7 @@ class _AuthenticationCheckerState extends State<AuthenticationChecker> {
 }
 
 class AuthenticationCheckerVm {
-  var _currentUser = StreamController<User>();
+  var _currentUser = StreamController<User?>();
 
   void getCurrentUser() {
     _currentUser.sink.add(FirebaseAuth.instance.currentUser);
@@ -54,5 +54,5 @@ class AuthenticationCheckerVm {
     _currentUser.close();
   }
 
-  Stream<User> get currentUSer => _currentUser.stream;
+  Stream<User?> get currentUSer => _currentUser.stream;
 }

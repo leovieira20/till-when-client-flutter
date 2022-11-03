@@ -24,7 +24,7 @@ class _SignInPageState extends State<SignInPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: RaisedButton(
+            child: ElevatedButton(
               onPressed: googleSignIn,
               child: Text("Sign in"),
             ),

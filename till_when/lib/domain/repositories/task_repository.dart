@@ -4,7 +4,7 @@ import 'package:till_when/domain/models/task.dart';
 
 class TaskRepository {
   final FirebaseFirestore instance = FirebaseFirestore.instance;
-  final String email = FirebaseAuth.instance.currentUser.email;
+  final String? email = FirebaseAuth.instance.currentUser?.email;
 
   Future<List<Task>> getTasksFrom(String projectId) {
     return instance

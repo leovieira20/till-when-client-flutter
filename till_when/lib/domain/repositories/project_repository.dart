@@ -4,9 +4,9 @@ import 'package:till_when/domain/models/project.dart';
 
 class ProjectRepository {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
-  final String _userEmail = FirebaseAuth.instance.currentUser.email;
+  final String? _userEmail = FirebaseAuth.instance.currentUser?.email;
 
-  CollectionReference _projectCollection;
+  late CollectionReference _projectCollection;
 
   ProjectRepository() {
     _projectCollection = _instance.collection("users").doc(_userEmail).collection("projects");
@@ -15,7 +15,7 @@ class ProjectRepository {
   Future<Project> get(String id) async {
     var snapshot = await _projectCollection.doc(id).get();
 
-    return Project.fromJson(id, snapshot.data());
+    return Project.fromJson(id, snapshot.data() as Map<String, dynamic>);
   }
 
   Future<void> create(Project p) async {
@@ -35,7 +35,7 @@ class ProjectRepository {
   Future<List<Project>> list() async {
     var querySnapshot = await _projectCollection.orderBy("priority", descending: true).get();
 
-    return querySnapshot.docs.map((e) => Project.fromJson(e.id, e.data())).toList();
+    return querySnapshot.docs.map((e) => Project.fromJson(e.id, e.data() as Map<String, dynamic>)).toList();
   }
 
   Future<void> delete(Project p) {
@@ -57,13 +57,13 @@ class ProjectRepository {
     await transaction;
   }
 
-  Future<num> getHighestProjectPriority() async {
+  Future<int> getHighestProjectPriority() async {
     var projects = await _projectCollection
         .orderBy("priority", descending: true)
         .limit(1)
         .snapshots()
         .map((query) => query.docs)
-        .map((docs) => docs.map((e) => Project.fromJson(e.id, e.data())).toList())
+        .map((docs) => docs.map((e) => Project.fromJson(e.id, e.data() as Map<String, dynamic>)).toList())
         .first;
 
     return projects.isEmpty ? 1 : projects.first.priority + 1;

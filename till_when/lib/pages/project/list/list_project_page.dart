@@ -10,7 +10,7 @@ class ListProjectPage extends StatefulWidget {
 
   final ListProjectPageVm vm;
 
-  ListProjectPage(this.vm, {Key key}) : super(key: key);
+  ListProjectPage(this.vm, {Key? key}) : super(key: key);
 
   @override
   _ListProjectPageState createState() => _ListProjectPageState();
@@ -39,7 +39,7 @@ class _ListProjectPageState extends State<ListProjectPage> {
 
             var projects = snapshot.data;
 
-            if (projects.isEmpty) {
+            if (projects!.isEmpty) {
               return Text(
                 'Your projects will be here',
               );

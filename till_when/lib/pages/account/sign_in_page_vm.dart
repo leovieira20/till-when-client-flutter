@@ -6,7 +6,7 @@ class SignInPageVm {
 
   SignInPageVm(this.service);
 
-  Future<UserCredential> googleSignIn() async {
+  Future<Future<UserCredential?>> googleSignIn() async {
     return service.googleSignIn();
   }
 }

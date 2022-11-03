@@ -5,7 +5,7 @@ class ProjectNameInput extends StatelessWidget {
   final TextEditingController controller;
 
   const ProjectNameInput({
-    @required this.controller,
+    required this.controller,
   });
 
   @override
@@ -13,7 +13,7 @@ class ProjectNameInput extends StatelessWidget {
     return TextInput(
       controller: controller,
       validator: (value) {
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'Please enter some text';
         }
         return null;

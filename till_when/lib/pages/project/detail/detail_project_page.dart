@@ -9,11 +9,11 @@ class DetailProjectPage extends StatelessWidget {
 
   final DetailProjectPageVm vm;
 
-  const DetailProjectPage(this.vm, {Key key}) : super(key: key);
+  const DetailProjectPage(this.vm, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Project p = ModalRoute.of(context).settings.arguments;
+    final Project p = ModalRoute.of(context)!.settings.arguments as Project;
     vm.getTasks(p.id);
 
     return Scaffold(

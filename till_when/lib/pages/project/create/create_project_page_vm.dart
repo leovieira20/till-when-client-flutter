@@ -11,7 +11,7 @@ class CreateProjectPageVm {
     _isBusy.sink.add(false);
   }
 
-  Future<void> createProject(String name, num numOfTasks, String nameOfTasks) async {
+  Future<void> createProject(String name, int numOfTasks, String nameOfTasks) async {
     _isBusy.sink.add(true);
 
     await repository.create(await projectFactory.make(name, numOfTasks, nameOfTasks));

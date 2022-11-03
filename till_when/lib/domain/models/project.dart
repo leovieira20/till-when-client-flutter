@@ -1,16 +1,20 @@
-import 'package:flutter/material.dart';
 import 'package:till_when/domain/models/task.dart';
 
 class Project {
   DateTime createdAt;
   String id;
   String name;
-  num priority;
+  int priority;
   List<Task> tasks;
 
-  Project({this.id, @required this.name, this.priority = 0, DateTime createdAt})
-      : createdAt = DateTime.now(),
-        tasks = List<Task>();
+  Project({
+    String? id,
+    required this.name,
+    this.priority = 0,
+    DateTime? createdAt,
+  })  : id = "",
+        createdAt = DateTime.now(),
+        tasks = <Task>[];
 
   factory Project.fromJson(String id, Map<String, dynamic> data) {
     return Project(
@@ -21,7 +25,12 @@ class Project {
     );
   }
 
-  factory Project.withTasks({String name, num priority, num numOfTasks, String nameOfTasks}) {
+  factory Project.withTasks({
+    required String name,
+    required int priority,
+    required int numOfTasks,
+    required String nameOfTasks,
+  }) {
     var project = Project(name: name, priority: priority);
 
     for (var i = 0; i < numOfTasks; ++i) {

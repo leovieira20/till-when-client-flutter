@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 class SubmitButton extends StatelessWidget {
-  final Function onPressed;
+  final void Function() onPressed;
   final Stream<bool> isBusyController;
   final String label;
 
   SubmitButton({
-    @required this.onPressed,
-    @required this.isBusyController,
-    @required this.label,
+    required this.onPressed,
+    required this.isBusyController,
+    required this.label,
   });
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return ElevatedButton(
       onPressed: onPressed,
       child: StreamBuilder<bool>(
         stream: isBusyController,

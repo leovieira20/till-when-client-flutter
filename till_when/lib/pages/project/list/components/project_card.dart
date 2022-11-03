@@ -3,14 +3,14 @@ import 'package:till_when/domain/models/project.dart';
 
 class ProjectCard extends StatelessWidget {
   final Project project;
-  final Function onDismissed;
-  final Function onTapped;
+  final void Function(DismissDirection)? onDismissed;
+  final void Function()? onTapped;
 
   const ProjectCard({
-    Key key,
-    @required this.project,
-    @required this.onTapped,
-    @required this.onDismissed,
+    Key? key,
+    required this.project,
+    required this.onTapped,
+    required this.onDismissed,
   }) : super(key: key);
 
   @override

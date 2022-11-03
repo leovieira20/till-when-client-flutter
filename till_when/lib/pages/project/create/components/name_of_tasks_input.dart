@@ -5,8 +5,8 @@ class NameOfTasksInput extends StatelessWidget {
   final TextEditingController controller;
 
   const NameOfTasksInput({
-    Key key,
-    @required this.controller,
+    Key? key,
+    required this.controller,
   });
 
   @override
@@ -15,7 +15,7 @@ class NameOfTasksInput extends StatelessWidget {
       controller: controller,
       hintText: "ex: Chapter",
       validator: (value) {
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'Please enter some text';
         }
 

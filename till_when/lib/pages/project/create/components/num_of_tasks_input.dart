@@ -4,7 +4,7 @@ import 'package:till_when/pages/project/create/components/text_input.dart';
 class NumOfTasksInput extends StatelessWidget {
   final TextEditingController controller;
 
-  const NumOfTasksInput({@required this.controller});
+  const NumOfTasksInput({required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class NumOfTasksInput extends StatelessWidget {
       controller: controller,
       hintText: "1",
       validator: (value) {
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'Please enter some text';
         }
 

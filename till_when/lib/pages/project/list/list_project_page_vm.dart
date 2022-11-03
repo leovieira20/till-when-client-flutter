@@ -3,7 +3,7 @@ import 'package:till_when/domain/models/project.dart';
 import 'package:till_when/domain/repositories/project_repository.dart';
 
 class ListProjectPageVm {
-  List<Project> _currentShownProjects;
+  List<Project> _currentShownProjects = [];
   var _projectsStream = StreamController<List<Project>>();
   
   ProjectRepository _repository;
@@ -22,7 +22,7 @@ class ListProjectPageVm {
     _repository.delete(p);
   }
 
-  Future<void> reorderProjects(num oldIx, num newIx, List<Project> projects) async {
+  Future<void> reorderProjects(int oldIx, int newIx, List<Project> projects) async {
     var p = projects.removeAt(oldIx);
     projects.insert(newIx, p);
 

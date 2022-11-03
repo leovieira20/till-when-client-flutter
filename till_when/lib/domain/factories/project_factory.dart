@@ -6,7 +6,7 @@ class ProjectFactory {
 
   ProjectFactory(this._projectRepository);
 
-  Future<Project> make(String name, num numOfTasks, String nameOfTasks) async {
+  Future<Project> make(String name, int numOfTasks, String nameOfTasks) async {
     var highestPriorityInRepo = await _projectRepository.getHighestProjectPriority();
 
     // return Project(name: name, priority: highestPriorityInRepo);
